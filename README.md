@@ -1,15 +1,4 @@
-# Hash Code Helper
-
-Helper scripts for developing and running hash code problems.
-
-Use this repository to create a new repository for your Hash Code entry by clicking the 'Use this template' button within GitHub to create a new repository that contains all the files within this repository.
-
-## Contributing
-All contributions are welcome. Submissions should conform to PEP8 styling standards.
-
----
-
-# Google Hash Code
+# Google Hash Code 2022
 
 Google Hash Code Entry. The submission is contained within the `src` folder can be run using the below instructions.
 The `helper.py` file contains helper functions for use when developing the submission, this script is not intended to be part of the submission.
