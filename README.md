@@ -3,6 +3,10 @@
 Google Hash Code Entry. The submission is contained within the `src` folder can be run using the below instructions.
 The `helper.py` file contains helper functions for use when developing the submission, this script is not intended to be part of the submission.
 
+## Rank
+UK: 34th
+Worldwide: 877th/9031
+
 ## Usage
 * Save the competition data files in the `data` folder
 * `pipenv install` - Install dependencies
