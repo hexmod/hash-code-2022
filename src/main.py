@@ -99,10 +99,14 @@ def run(file_location, output_location):
                     aProject.add_contributor(aContributor.get_name(), aRole)
                     break
 
-
+    completedProjectCount = 0
     ### PRINT
     output_file = open(output_location, "w")
     # Write to file here
+    for aProject in allProjects:
+        if aProject.is_completed():
+            completedProjectCount += 1
+    output_file.write(f"{completedProjectCount}\n")
     for aProject in allProjects:
         if aProject.is_completed():
             output_file.write(f"{aProject.get_name()}\n")
