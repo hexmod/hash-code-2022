@@ -40,13 +40,16 @@ def run(file_location, output_location):
     print("Running Hash Code Entry")
     # Hash Code here :)
     allContributors = []
+    allProjects = []
 
     input_file = open(file_location, "r")
     numContributors = 0
     seenContributors = 0
     numProjects = 0
     currentContributor = None
+    currentProject = None
     currentContSkills = 0
+    currentProjectSkills = 0
     count = 0
     for line in input_file:
         # Do Something
@@ -70,12 +73,25 @@ def run(file_location, output_location):
                     allContributors.append(currentContributor)
                     currentContSkills = 0
                     seenContributors += 1
+        else:
+            if currentProjectSkills == 0:
+                splitLine = line.split(" ")
+                currentProject = Project(splitLine[0], int(splitLine[1]), int(splitLine[2]), int(splitLine[3]), int(splitLine[4]))
+                currentProjectSkills = int(splitLine[4])
+                currentProjectSeenSkills = 0
+            else:
+                splitLine = line.split(" ")
+                currentProject.add_role(splitLine[0], int(splitLine[1]))
+                currentProjectSeenSkills += 1
+                if currentProjectSeenSkills == currentProjectSkills:
+                    # Seen all skills
+                    allProjects.append(currentProject)
+                    currentProjectSkills = 0
         
 
     input_file.close()
 
-    print(allContributors[1].print())
-    print(currentContributor.print())
+    print(allProjects[1].print())
 
 
     # ----- SAMPLE: Write out results -----
