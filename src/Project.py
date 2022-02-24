@@ -6,28 +6,26 @@ class Project:
         self.daysToComplete = daysToComplete
         self.score = score
         self.bestBefore = bestBefore
-        self.roles = {}
-        self.orderedRoles = []
-        self.assignedRoles = {}
+        self.roles = [] # tuple (role, reqSkill) in order
+        self.assignedRoles = {} # num -> Person
 
     def add_role(self, name, reqLevel):
-        self.roles[name] = reqLevel
-        self.orderedRoles.append(name)
+        self.roles.append((name, reqLevel))
 
     def print(self):
         print(self.name, self.roles)
 
-    def add_contributor(self, name, role):
-        self.assignedRoles[role] = name
+    def add_contributor(self, name, roleIndex):
+        self.assignedRoles[roleIndex] = name
 
     def is_contributor_assigned(self, name):
         return name in self.assignedRoles.values()
 
     def get_roles(self):
-        return self.roles
+        return map(lambda x: x[0], self.roles)
 
-    def get_skill_for_role(self, role):
-        return self.roles[role]
+    def get_skill_for_role(self, roleIndex):
+        return self.roles[roleIndex][1]
 
     def is_completed(self):
         return len(self.roles) == len(self.assignedRoles)
@@ -37,7 +35,7 @@ class Project:
 
     def get_ordered_roles(self):
         res = ""
-        for aRole in self.roles:
-            res += self.assignedRoles[aRole]
+        for contributor in self.assignedRoles.values():
+            res += contributor
             res += " "
         return res[:-1]
