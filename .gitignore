@@ -1,6 +1,4 @@
 # Project Stuff
-data/*
-!data/readme.txt
 output/
 
 # Vscode Stuff
