@@ -90,28 +90,38 @@ def run(file_location, output_location):
     input_file.close()
     allProjects.sort(key=lambda project: project.get_shortest_completion_difference())
 
+    completedProjects = []
     ### DO THE WORK
-    for aProject in allProjects:
-        roleCount = 0
-        for aRole in aProject.get_roles():
-            required_skill = aProject.get_skill_for_role(roleCount)
-            for aContributor in allContributors:
-                if aContributor.get_skill_level(aRole) >= required_skill and not aProject.is_contributor_assigned(aContributor):
-                    aProject.add_contributor(aContributor, roleCount)
-                    break
-            roleCount += 1
-        if aProject.is_completed():
-            aProject.train_contributors()
-
+    scheduledNewProject = True 
+    while scheduledNewProject:
+        scheduledNewProject = False
+        for aProject in allProjects:
+            roleCount = 0
+            for aRole in aProject.get_roles():
+                required_skill = aProject.get_skill_for_role(roleCount)
+                for aContributor in allContributors:
+                    if aContributor.get_skill_level(aRole) >= required_skill and not aProject.is_contributor_assigned(aContributor):
+                        aProject.add_contributor(aContributor, roleCount)
+                        break
+                roleCount += 1
+            if aProject.is_completed():
+                aProject.train_contributors()
+                scheduledNewProject = True
+                completedProjects.append(aProject)
+        for aProject in completedProjects:
+            if aProject in allProjects:
+                allProjects.remove(aProject)
+            
+    
     completedProjectCount = 0
     ### PRINT
     output_file = open(output_location, "w")
     # Write to file here
-    for aProject in allProjects:
+    for aProject in completedProjects:
         if aProject.is_completed():
             completedProjectCount += 1
     output_file.write(f"{completedProjectCount}\n")
-    for aProject in allProjects:
+    for aProject in completedProjects:
         if aProject.is_completed():
             output_file.write(f"{aProject.get_name()}\n")
             output_file.write(f"{aProject.get_ordered_roles()}\n")
