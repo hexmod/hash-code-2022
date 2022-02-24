@@ -48,5 +48,5 @@ class Project:
 
     def get_shortest_completion_difference(self):
         if self.bestBefore - self.daysToComplete < 0:
-            return 99999999999999999999999999999
+            return 9999999
         return self.bestBefore - self.daysToComplete
