@@ -4,7 +4,7 @@ Google Hash Code Entry. The submission is contained within the `src` folder can 
 The `helper.py` file contains helper functions for use when developing the submission, this script is not intended to be part of the submission.
 
 ## Rank
-UK: 34th
+UK: 34th <br/>
 Worldwide: 877th/9031
 
 ## Usage
