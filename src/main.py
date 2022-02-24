@@ -96,10 +96,12 @@ def run(file_location, output_location):
         for aRole in aProject.get_roles():
             required_skill = aProject.get_skill_for_role(roleCount)
             for aContributor in allContributors:
-                if aContributor.get_skill_level(aRole) >= required_skill and not aProject.is_contributor_assigned(aContributor.get_name()):
-                    aProject.add_contributor(aContributor.get_name(), roleCount)
+                if aContributor.get_skill_level(aRole) >= required_skill and not aProject.is_contributor_assigned(aContributor):
+                    aProject.add_contributor(aContributor, roleCount)
                     break
             roleCount += 1
+        if aProject.is_completed():
+            aProject.train_contributors()
 
     completedProjectCount = 0
     ### PRINT
