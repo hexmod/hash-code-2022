@@ -110,6 +110,7 @@ def run(file_location, output_location):
                 completedProjects.append(aProject)
             else:
                 # Look for mentor
+                roleCount = 0
                 for aRole in aProject.get_roles():
                     required_skill = aProject.get_skill_for_role(roleCount)
                     if not aProject.is_role_filled(aRole) and aProject.has_mentor_for_role(aRole, required_skill):
@@ -117,6 +118,7 @@ def run(file_location, output_location):
                             if aContributor.get_skill_level(aRole) >= (required_skill - 1) and not aProject.is_contributor_assigned(aContributor):
                                 aProject.add_contributor(aContributor, roleCount)
                                 break
+                    roleCount += 1
                 if not aProject.is_completed():
                     aProject.unassign_contributors()
         for aProject in completedProjects:

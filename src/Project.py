@@ -20,7 +20,7 @@ class Project:
     
     def has_mentor_for_role(self, aRole, required_skill):
         for cont in self.assignedRoles.values():
-            if cont.has_skill_for_role(aRole, required_skill)
+            return cont.has_skill_for_role(aRole, required_skill)
 
     def print(self):
         print(self.name, self.roles)
