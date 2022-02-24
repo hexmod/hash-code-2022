@@ -5,6 +5,9 @@ class Contributor:
         self.numSkills = numSkills
         self.skills = {}
 
+    def has_skill_for_role(self, aRole, required_skill)
+        return self.skills[aRole] >= required_skill
+
     def add_skill(self, name, level):
         self.skills[name] = level
 

@@ -109,7 +109,16 @@ def run(file_location, output_location):
                 scheduledNewProject = True
                 completedProjects.append(aProject)
             else:
-                aProject.unassign_contributors()
+                # Look for mentor
+                for aRole in aProject.get_roles():
+                    required_skill = aProject.get_skill_for_role(roleCount)
+                    if not aProject.is_role_filled(aRole) and aProject.has_mentor_for_role(aRole, required_skill):
+                        for aContributor in allContributors:
+                            if aContributor.get_skill_level(aRole) >= (required_skill - 1) and not aProject.is_contributor_assigned(aContributor):
+                                aProject.add_contributor(aContributor, roleCount)
+                                break
+                if not aProject.is_completed():
+                    aProject.unassign_contributors()
         for aProject in completedProjects:
             if aProject in allProjects:
                 allProjects.remove(aProject)
