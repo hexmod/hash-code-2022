@@ -88,7 +88,7 @@ def run(file_location, output_location):
                     allProjects.append(currentProject)
                     currentProjectSkills = 0
     input_file.close()
-
+    allProjects.sort(key=lambda project: project.get_shortest_completion_difference())
 
     ### DO THE WORK
     for aProject in allProjects:

@@ -45,3 +45,8 @@ class Project:
         for role, skill in self.roles:
             self.assignedRoles[count].update_skill(role, skill)
             count += 1
+
+    def get_shortest_completion_difference(self):
+        if self.bestBefore - self.daysToComplete < 0:
+            return 99999999999999999999999999999
+        return self.bestBefore - self.daysToComplete
