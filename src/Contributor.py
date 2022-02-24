@@ -14,3 +14,12 @@ class Contributor:
 
     def print(self):
         print(self.name, self.skills)
+
+    def get_skill_level(self, skill):
+        if skill in self.skills:
+            return self.skills[skill]
+        else:
+            return 0
+
+    def get_name(self):
+        return self.name

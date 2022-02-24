@@ -31,15 +31,15 @@ def repl():
         refresh_source()
 
         if action == "singleFile":
-            run_for_file(get_file_path(param), OUTPUT_LOCATION)
+            run_for_file(get_file_path(param), os.path.join(OUTPUT_LOCATION, param))
         elif action == "allFiles":
             for a_file in data_files:
-                run_for_file(get_file_path(a_file), OUTPUT_LOCATION)
+                run_for_file(get_file_path(a_file), os.path.join(OUTPUT_LOCATION, a_file))
         elif action == "zip":
             zip_project(OUTPUT_LOCATION)
         elif action == "allFilesAndZip":
             for a_file in data_files:
-                run_for_file(get_file_path(a_file), OUTPUT_LOCATION)
+                run_for_file(get_file_path(a_file), os.path.join(OUTPUT_LOCATION, a_file))
             zip_project(OUTPUT_LOCATION)
 
 

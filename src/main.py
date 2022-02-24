@@ -84,22 +84,30 @@ def run(file_location, output_location):
                 currentProject.add_role(splitLine[0], int(splitLine[1]))
                 currentProjectSeenSkills += 1
                 if currentProjectSeenSkills == currentProjectSkills:
-                    # Seen all skills
+                    # Seen all project
                     allProjects.append(currentProject)
                     currentProjectSkills = 0
-        
-
     input_file.close()
 
-    print(allProjects[1].print())
+
+    ### DO THE WORK
+    for aProject in allProjects:
+        for aRole in aProject.get_roles():
+            required_skill = aProject.get_skill_for_role(aRole)
+            for aContributor in allContributors:
+                if aContributor.get_skill_level(aRole) >= required_skill and not aProject.is_contributor_assigned(aContributor.get_name()):
+                    aProject.add_contributor(aContributor.get_name(), aRole)
+                    break
 
 
-    # ----- SAMPLE: Write out results -----
-    # output_file = open(output_location, "w")
-    # # Write to file here
-    # output_file.write(f"{"Something"}\n")
-    # output_file.close()
-    # ------------------------------------
+    ### PRINT
+    output_file = open(output_location, "w")
+    # Write to file here
+    for aProject in allProjects:
+        if aProject.is_completed():
+            output_file.write(f"{aProject.get_name()}\n")
+            output_file.write(f"{aProject.get_ordered_roles()}\n")
+    output_file.close()
 
 
 # When run from the terminal
