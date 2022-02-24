@@ -50,3 +50,6 @@ class Project:
         if self.bestBefore - self.daysToComplete < 0:
             return 9999999
         return self.bestBefore - self.daysToComplete
+
+    def unassign_contributors(self):
+        self.assignedRoles = {}

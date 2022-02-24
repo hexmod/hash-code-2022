@@ -108,6 +108,8 @@ def run(file_location, output_location):
                 aProject.train_contributors()
                 scheduledNewProject = True
                 completedProjects.append(aProject)
+            else:
+                aProject.unassign_contributors()
         for aProject in completedProjects:
             if aProject in allProjects:
                 allProjects.remove(aProject)
